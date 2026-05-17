@@ -6,6 +6,8 @@ contract Hospital000244328 {
     address public dirContrato = 0xd2a5bC10698FD955D1Fe6cb468a17809A08fd005;
 
     event MensajeEjecucion(string mensaje);
+    event ElementoActivo(uint id, string nombre, uint edad, bool estado);
+    event ElementoImpar(uint id, string nombre, uint edad, bool estado);
 
     modifier mostrarEjecutadoPor() {
         emit MensajeEjecucion("Ejecutado por: 000244328 - CARLOS ALONSO PAREDES QUIROZ");
@@ -41,5 +43,36 @@ contract Hospital000244328 {
     function obtenerPaciente(uint _index) public mostrarEjecutadoPor returns (uint, string memory, uint, bool) {
         Paciente memory p = pacientes[_index];
         return (p.id, p.nombre, p.edad, p.estado);
+    }
+
+    function inactivarElemento(uint _posicion) public mostrarEjecutadoPor {
+        require(_posicion < pacientes.length, "Error: posicion invalida");
+        pacientes[_posicion].estado = false;
+    }
+
+    function mostrarActivos() public mostrarEjecutadoPor {
+        for (uint i = 0; i < pacientes.length; i++) {
+            if (pacientes[i].estado == true) {
+                emit ElementoActivo(
+                    pacientes[i].id,
+                    pacientes[i].nombre,
+                    pacientes[i].edad,
+                    pacientes[i].estado
+                );
+            }
+        }
+    }
+
+    function mostrarIdImpar() public mostrarEjecutadoPor {
+        for (uint i = 0; i < pacientes.length; i++) {
+            if (pacientes[i].id % 2 != 0) {
+                emit ElementoImpar(
+                    pacientes[i].id,
+                    pacientes[i].nombre,
+                    pacientes[i].edad,
+                    pacientes[i].estado
+                );
+            }
+        }
     }
 }
