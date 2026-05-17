@@ -3,7 +3,7 @@ pragma solidity >=0.8.2 <0.9.0;
 
 contract Hospital000244328 {
 
-    address public dirContrato = 0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8;
+    address public dirContrato = 0xd2a5bC10698FD955D1Fe6cb468a17809A08fd005;
 
     struct Paciente {
         uint id;
